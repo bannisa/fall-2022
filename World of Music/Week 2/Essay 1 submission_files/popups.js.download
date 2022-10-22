@@ -1,0 +1,42 @@
+"use strict";
+eesy.define(['jquery-private', 'json!settings-supportcenter', 'mustachejs', 'presentation-helper', 'focus-trap'], function ($, settings, Mustache, presentationHelper, focusTrap) {
+    var popupSelector = '#eesy-standardcontainer';
+    var popupOverlaySelector = '#eesy-dark-screen';
+    function preview(helpItem) {
+        $('.eesy_dark').remove();
+        window.scrollTo(0, 0);
+        $('body').append(Mustache.to_html(eesyTemplates.standard, presentationHelper.helpItemModel(helpItem), eesyTemplates));
+        $(popupOverlaySelector).addClass('preview');
+        $(popupOverlaySelector).height($(document).height());
+        $(popupOverlaySelector).show();
+        $prepareContainer(helpItem).show();
+    }
+    function hide() {
+        $(popupSelector).remove();
+    }
+    function show(helpItem) {
+        $('.eesy_dark').remove();
+        $('body').append(Mustache.to_html(eesyTemplates.standard, presentationHelper.helpItemModel(helpItem), eesyTemplates));
+        $(popupOverlaySelector).fadeIn('fast');
+        var $container = $prepareContainer(helpItem);
+        $container.fadeIn('fast', function () {
+            focusTrap.createFocusTrap($container[0]);
+        });
+    }
+    function $prepareContainer(helpItem) {
+        var $container = $(popupSelector + "[data-helpitemid=\"" + helpItem.id + "\"]");
+        if (helpItem.width !== '0' || helpItem.height !== '0') {
+            $container.css({
+                width: helpItem.width + 'px',
+                height: helpItem.height + 'px',
+            });
+        }
+        return $container;
+    }
+    return {
+        preview: preview,
+        show: show,
+        hide: hide,
+    };
+});
+//# sourceMappingURL=popups.js.map
