@@ -1,0 +1,6 @@
+implicates("Colonel Mustard","Professor Plum").
+implicates("Mrs. Peacock","Colonel Mustard").
+//doeNotImplicate("Miss Scarlet").
+//doesNotImplicate("Professor Plum").
+
+criminial(X) :- implicates(X,Y), not(implicates(Y,_)).
