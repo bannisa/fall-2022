@@ -1,0 +1,7 @@
+divide(X,Y) :- X >= Y, not(0 =:= X), not(0 =:= Y),0 is X mod Y.
+divide(X,Y) :- X < Y, not(0 =:= X), not(0 =:= Y),0 is Y mod X.
+
+divides(_,R) :- R =\= 1.
+divides(P,R) :- divide(P,R); Z is R - 1, divides(P,Z).
+
+isPrime(P) :- divides(P,P-1).

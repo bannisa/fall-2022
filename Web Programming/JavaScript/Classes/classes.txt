@@ -1,0 +1,88 @@
+Date: 11/12/2022
+Subject: JavaScript Classes
+
+Class Definitions
+	Classes are named functions that can be represented using the class keyword.
+	
+	class Shape { }
+	
+	let Shape = class {}
+
+	Shape = class Shape {}
+	
+	Above, are all vaild syntax for declaring a class in JavaScript.
+	
+Class body and Methods
+	The class body is subject to a higher level of syntax stricness than other places in JavaScript
+		It's under Strict mode
+
+	The constructor method is a special method that determines how the class should be instantiated
+		including any peramaters to the object itself.
+
+	The constructor method is called when the new keyword is used to instantiate a object.
+	
+	Static Keyword
+		The static keyword is used to move the linkage from a instantiated object, to the Class itself
+			for data members and methods.
+		
+		Static (method name) moves the method to be a method of the class.
+		
+		Static (data member) moves the data member to the class.
+
+	Super & This
+		The super keyword can be used to access, and instantiate the parent object.
+		
+		"this" keyword is tricky to use. Using "this" when within a static method, or within a method that's
+			seperated from the class will cause "this" to be undefined.
+	
+	Public Data Members
+		Data members can either be defined at the very top of the class definition
+			and then used within the constructor or defined only within the constructor.
+
+		Below is a example.
+		class Shape 
+		{
+		    shapeName = "";
+		    shapeArea = 0;
+		    shapeVolume = 0;
+		function constructor(shapeName,shapeArea,shapeVolume) {
+
+		this.shapeName = shapeName;
+		this.shapeArea = shapeArea;
+		this.shapeVolume = shapeVolume;
+
+		}
+		
+		}
+		
+		or 
+		class Shape 
+		{
+
+		function constructor(shapeName,shapeArea,shapeVolume) {
+
+		this.shapeName = shapeName;
+		this.shapeArea = shapeArea;
+		this.shapeVolume = shapeVolume;
+
+		}
+		}
+		
+		Is valid.
+
+		Private Data members
+			Data members that are private cannot be accessed outside the class doing so will resole
+				in a exception.
+
+			They're made private by prefixing the member name with the pound, or hashtag "#" sign.
+			
+			Looking to the example above, prefixing the data members with the hashtag would result
+				in the members being private.
+	Extends Keyword
+		The extends keyword makes this class a child of the class after the extends keyword.
+		
+		Example:	class Rectangel extends Shape {}
+		
+		
+		
+		
