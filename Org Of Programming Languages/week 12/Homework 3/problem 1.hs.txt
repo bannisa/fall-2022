@@ -1,0 +1,40 @@
+isOdd:: Int -> Bool
+isOdd n = !(mod n 2 == 0)
+
+isPerfectSquare::Int -> Bool
+isPerfectSquare n
+                    | n < 2
+                    | otherwise = ((sqrt (floor (fromIntegral n ))) ^ 2) ==  fromIntegral n
+
+
+
+getListOfUserInts:: String -> String -> Maybe [Int]
+getListOfUserInts message exitKeyWord = do
+
+                            putStrLn message
+                            
+                            input <- getLine
+                            
+                            if(input != exitKeyWord) then 
+                                let userInt = read input :: Int
+                                return [userInt] ++ getListOfUserInts
+                            else
+                                return []
+
+main:: IO()
+main = do
+        
+        let myMessage = "Enter a number, or exit to stop"
+        let myKeyWord = "exit"
+        
+        let userInts = getListOfUserInts myMessage myKeyWord
+        
+        let oddOrPerfects = [ concat (show x) "\n" | x <- userInts | isOdd x, isPerfectSquare x]
+        
+        [putStrLn x | x < oddOrPerfects]
+        
+        putStrLn "exiting"
+        
+        
+        
+        
